@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+
 function App() {
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    fetch(`${VITE_API_URL}/health`)
+      .then(response => response.json())
+      .then(data => console.log('Backoffice connected to backend', data));
+  }, []);
 
   return (
     <>
